@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fff2f3f4"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:paddingLeft="@dimen/_5sdp"
+        android:paddingRight="@dimen/_5sdp">
+
+        <LinearLayout
+            android:id="@+id/lin2"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:background="@color/green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/lblTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I N P U T  S E R V I C E"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/ubuntu"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_14ssp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_below="@+id/lin2"
+            android:id="@+id/rl1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:shrinkColumns="*"
+                android:stretchColumns="*" >
+
+                <TableRow
+                    android:id="@+id/tableRowCentre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:padding="@dimen/_1sdp" >
+
+                    <TextView
+                        android:id="@+id/lblCentre"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tanggal Service"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                        android:id="@+id/datePickerEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10ssp"
+                        android:hint=" select date"
+                        android:padding="@dimen/_4sdp"
+                        android:background="@drawable/rect"
+                        app:minDate="01/01/1981"
+                        app:maxDate="01/01/2050"
+                        app:dateFormat="yyyy-MM-dd"/>
+
+                </TableRow>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:background="@color/colorBlack"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_height="@dimen/_2sdp" />
+
+                <TableRow
+                    android:id="@+id/tableRow12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_1sdp" >
+
+                    <TextView
+                        android:id="@+id/lblTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Judul"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <EditText
+                        android:id="@+id/edTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="#000000"
+                        android:hint=" judul"
+                        android:padding="@dimen/_4sdp"
+                        android:background="@drawable/rect"
+                        android:textSize="@dimen/_10ssp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_1sdp" >
+
+                    <TextView
+                        android:id="@+id/lblJenis"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Jenis Motor"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <EditText
+                        android:id="@+id/edJenis"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/ubuntu"
+                        android:padding="@dimen/_4sdp"
+                        android:background="@drawable/rect"
+                        android:textColor="#000000"
+                        android:hint=" jenis motor"
+                        android:textSize="@dimen/_10ssp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_1sdp" >
+
+                    <TextView
+                        android:id="@+id/lblPlace"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tempat"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <EditText
+                        android:id="@+id/edPlace"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint=" tempat service"
+                        android:padding="@dimen/_4sdp"
+                        android:background="@drawable/rect"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10ssp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableRow3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_1sdp" >
+
+                    <TextView
+                        android:id="@+id/lblKet"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Keterangan"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <EditText
+                        android:id="@+id/edKet"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:lines="4"
+                        android:maxLines="10"
+                        android:scrollbars="vertical"
+                        android:hint=" keterangan"
+                        android:padding="@dimen/_4sdp"
+                        android:background="@drawable/rect"
+                        android:fontFamily="@font/ubuntu"
+                        android:textColor="#000000"
+                        android:textSize="@dimen/_10ssp" />
+
+                </TableRow>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:background="@color/colorBlack"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_height="@dimen/_2sdp" />
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:src="@drawable/arrow"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter" />
+
+            </TableLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lin01"
+            android:layout_below="@+id/rl1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_gravity="center"
+                android:background="@color/green"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="S I M P A N"
+                android:padding="@dimen/_7sdp"
+                android:textSize="@dimen/_14ssp"
+                android:id="@+id/btnSubmit"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

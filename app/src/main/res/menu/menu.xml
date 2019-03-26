@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Back Up"
+        android:id="@+id/backup" />
+    <item
+        android:title="Restore Old DB"
+        android:id="@+id/restore" />
+    <item
+        android:title="Clear Cache"
+        android:id="@+id/cache" />
+
+</menu>
