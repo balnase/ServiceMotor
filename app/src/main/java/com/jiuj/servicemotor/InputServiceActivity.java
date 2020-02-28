@@ -40,7 +40,7 @@ public class InputServiceActivity extends AppCompatActivity {
     ImageView img;
     SQLiteDatabase db;
     myDBClass dbx;
-    EditText  edTitle, edPlace, edType, edDetail;
+    EditText  edTitle, edPlace, edType, edDetail, edKm;
     Button btnSubmit;
     private static final int CAMERA_REQUEST = 1888;
     protected static final String PHOTO_TAKEN = "photo_taken";
@@ -67,6 +67,7 @@ public class InputServiceActivity extends AppCompatActivity {
         edTitle = (EditText) findViewById(R.id.edTitle);
         edPlace = (EditText) findViewById(R.id.edPlace);
         edType = (EditText) findViewById(R.id.edJenis);
+        edKm = (EditText) findViewById(R.id.edKm);
         edDetail = (EditText) findViewById(R.id.edKet);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
         img = (ImageView) findViewById(R.id.img);
@@ -191,6 +192,7 @@ public class InputServiceActivity extends AppCompatActivity {
             values.put("keterangan", sKet);
             values.put("motortype", sType);
             values.put("image", encodedImage);
+            values.put("km", edKm.getText().toString());
             values.put("tglservice", sDate);
             values.put("createtime", sTgl);
             db.insert("db_service", null, values);
@@ -200,7 +202,6 @@ public class InputServiceActivity extends AppCompatActivity {
             btnSubmit.setVisibility(View.GONE);
 
             Toast.makeText(this,"Foto berhasil disimpan !!", Toast.LENGTH_LONG).show();
-
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block

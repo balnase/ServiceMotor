@@ -28,6 +28,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private myDBClass dbx=null;
     FloatingActionButton fab;
     private static String sTgl = "";
+    DecimalFormatSymbols x;
+    DecimalFormat y;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         File sd = Environment.getExternalStorageDirectory();
         dbx = new myDBClass(this);
         db = dbx.getWritableDatabase();
+        this.x = new DecimalFormatSymbols();
+        this.y = new DecimalFormat("###,###,###,###", this.x);
         fab.setOnClickListener(new MainActivity.ButtonClickHandler());
         long size = 0;
         size += getDirSize(this.getCacheDir());
@@ -71,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         if (csr.moveToFirst()) {
             do
             {
-                ServiceList KFL = new ServiceList(csr.getString(0), csr.getString(1)+" ("+csr.getString(6)+")", csr.getString(2)+" ("+csr.getString(4)+")", csr.getString(3), csr.getString(5));
+                ServiceList KFL = new ServiceList(csr.getString(0), csr.getString(1)+" ("+csr.getString(7)+")", csr.getString(2)+" ("+csr.getString(4)+") \nKM : "+ y.format(Double.parseDouble(csr.getString(6))), csr.getString(3), csr.getString(5));
                 imageArry.add(KFL);
             } while (csr.moveToNext());
         }
@@ -119,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             File data = Environment.getDataDirectory();
             String packageName = context.getApplicationInfo().packageName;
             sTgl = getDateTime();
+            sTgl = sTgl.replace("-", "_");
             if (sd.canWrite()) {
                 String currentDBPath = String.format("//data//%s//databases//%s",
                         packageName, databaseName);
@@ -151,16 +159,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.backup:
                 backupDatabase(MainActivity.this,"servicemotor.db");
                 break;
-
             case R.id.restore:
                 restoreDB();
                 break;
-
             case R.id.cache:
                 deleteCache(this);
-                //clearApplicationData();
                 break;
-
         }
         return true;
     }
@@ -209,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
             for (String s : children) {
                 if (!s.equals("lib")) {
                     deleteDir(new File(appDir, s));
-
                 }
             }
         }
@@ -232,24 +235,43 @@ public class MainActivity extends AppCompatActivity {
             String selectQuery = "SELECT * from db_service";
             final Cursor cursor = db.rawQuery(selectQuery, null);
             int count = cursor.getCount();
-            if(count>0){
-            }else{
-                String selectQuery2 = "SELECT * from db_service";
-                final Cursor csr = sqlite.rawQuery(selectQuery2, null);
-                if (csr.moveToFirst()) {
-                    do
-                    {
-                        ContentValues values = new ContentValues();
-                        values.put("noref", csr.getString(0));
-                        values.put("judul", csr.getString(1));
-                        values.put("tempat", csr.getString(2));
-                        values.put("keterangan", csr.getString(3));
-                        values.put("motortype", csr.getString(4));
-                        values.put("image", csr.getString(5));
-                        values.put("tglservice", csr.getString(6));
-                        values.put("createtime", csr.getString(7));
-                        db.insert("db_service", null, values);
-                    } while (csr.moveToNext());
+            if(count<=0){
+                final Cursor rawQuery = sqlite.rawQuery(selectQuery, null);
+                int columnCount = rawQuery.getColumnCount();
+                if(columnCount>8){
+                    if (rawQuery.moveToFirst()) {
+                        do
+                        {
+                            ContentValues values = new ContentValues();
+                            values.put("noref", rawQuery.getString(0));
+                            values.put("judul", rawQuery.getString(1));
+                            values.put("tempat", rawQuery.getString(2));
+                            values.put("keterangan", rawQuery.getString(3));
+                            values.put("motortype", rawQuery.getString(4));
+                            values.put("image", rawQuery.getString(5));
+                            values.put("km", rawQuery.getString(6));
+                            values.put("tglservice", rawQuery.getString(7));
+                            values.put("createtime", rawQuery.getString(8));
+                            db.insert("db_service", null, values);
+                        } while (rawQuery.moveToNext());
+                    }
+                }else{
+                    if (rawQuery.moveToFirst()) {
+                        do
+                        {
+                            ContentValues values = new ContentValues();
+                            values.put("noref", rawQuery.getString(0));
+                            values.put("judul", rawQuery.getString(1));
+                            values.put("tempat", rawQuery.getString(2));
+                            values.put("keterangan", rawQuery.getString(3));
+                            values.put("motortype", rawQuery.getString(4));
+                            values.put("image", rawQuery.getString(5));
+                            values.put("km", "");
+                            values.put("tglservice", rawQuery.getString(6));
+                            values.put("createtime", rawQuery.getString(7));
+                            db.insert("db_service", null, values);
+                        } while (rawQuery.moveToNext());
+                    }
                 }
                 file.delete();
                 displayLv();
@@ -257,28 +279,5 @@ public class MainActivity extends AppCompatActivity {
         }else{
             Toast.makeText(MainActivity.this, "File : com.jiuj.servicemotor.db tidak ada !!",Toast.LENGTH_LONG).show();
         }
-
-        /*
-        String selectQuery = "SELECT * from db_service";
-        String a = "";
-        final Cursor csr = sqlite.rawQuery(selectQuery, null);
-        if (csr.moveToFirst()) {
-            do
-            {
-                //a += csr.getString(1);
-                //Toast.makeText(MainActivity.this, a,Toast.LENGTH_LONG).show();
-                ContentValues values = new ContentValues();
-                values.put("noref", csr.getString(0));
-                values.put("judul", csr.getString(1));
-                values.put("tempat", csr.getString(2));
-                values.put("keterangan", csr.getString(3));
-                values.put("motortype", csr.getString(4));
-                values.put("image", csr.getString(5));
-                values.put("tglservice", csr.getString(6));
-                values.put("createtime", csr.getString(7));
-                db.insert("db_service", null, values);
-            } while (csr.moveToNext());
-        }
-        */
     }
 }

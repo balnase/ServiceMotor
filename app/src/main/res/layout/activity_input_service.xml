@@ -182,8 +182,14 @@
 
                 </TableRow>
 
+                <TableRow android:id="@+id/tableRow3" android:padding="@dimen/_1sdp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/_5sdp">
+                    <TextView android:textSize="@dimen/_10ssp" android:textColor="#000000" android:id="@+id/lblkm" android:layout_width="0dp" android:layout_height="wrap_content" android:text="KM" android:layout_weight="1" android:fontFamily="@font/ubuntu"/>
+                    <EditText android:textSize="@dimen/_10ssp" android:textColor="#000000" android:id="@+id/edKm" android:background="@drawable/rect" android:padding="@dimen/_4sdp" android:layout_width="0dp" android:layout_height="wrap_content" android:hint=" 0 km" android:layout_weight="1" android:fontFamily="@font/ubuntu"/>
+                </TableRow>
+
+
                 <TableRow
-                    android:id="@+id/tableRow3"
+                    android:id="@+id/tableRow4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"

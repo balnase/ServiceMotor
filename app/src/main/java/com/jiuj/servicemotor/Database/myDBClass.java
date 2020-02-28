@@ -18,7 +18,7 @@ public class myDBClass extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table db_service('noref' text, 'judul' text, 'tempat' text, 'keterangan' text,'motortype' text,'image' text, 'tglservice' datetime DEFAULT (datetime('now','localtime')), 'createtime' datetime DEFAULT (datetime('now','localtime')))");
+        db.execSQL("create table db_service('noref' text, 'judul' text, 'tempat' text, 'keterangan' text,'motortype' text,'image' text,'km' text,'tglservice' datetime DEFAULT (datetime('now','localtime')), 'createtime' datetime DEFAULT (datetime('now','localtime')))");
     }
 
     public String getDateTime() {

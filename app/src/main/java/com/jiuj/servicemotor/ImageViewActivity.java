@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ public class ImageViewActivity extends AppCompatActivity {
     myDBClass dbx;
     Button btnBack;
     byte[] outImage;
+    String noref ="";
 
 
     @Override
@@ -54,6 +56,7 @@ public class ImageViewActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             outImage= getIntent().getByteArrayExtra("key2");
+            noref = getIntent().getStringExtra("key");
             ByteArrayInputStream imageStream = new ByteArrayInputStream(outImage);
             Bitmap theImage = BitmapFactory.decodeStream(imageStream);
             img.setImageBitmap(theImage);
@@ -77,15 +80,27 @@ public class ImageViewActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            Intent i = new Intent(this,MainActivity.class);
-            startActivity(i);
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        } else if (itemId == R.id.delete) {
+            deleteRcd();
+        }
+        return true;
+    }
 
+    private void deleteRcd(){
+        String query = "delete from db_service where noref='"+noref+"'";
+        db.execSQL(query);
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
 }
